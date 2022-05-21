@@ -1,4 +1,4 @@
-import './emloyees-add-form.css';
+import './emloyees-add-form.scss';
 import {Component} from "react";
 
 class EmployeesAddForm extends Component {
