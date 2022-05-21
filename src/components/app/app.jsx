@@ -11,9 +11,9 @@ class App extends Component {
     super(props);
     this.state = {
       data: [
-        {name: 'Alexey Sheptura', salary: 800, increase: false, id: 1},
-        {name: 'Oleh Frolow', salary: 600, increase: false, id: 2},
-        {name: 'Vitaliy Hoyda', salary: 1200, increase: true, id: 3},
+        {name: 'Alexey Sheptura', salary: 800, increase: false, like: true, id: 1},
+        {name: 'Oleh Frolow', salary: 600, increase: false, like: false, id: 2},
+        {name: 'Vitaliy Hoyda', salary: 1200, increase: true, like: false, id: 3},
       ]
     };
     this.maxId = 4;
@@ -37,6 +37,7 @@ class App extends Component {
       name,
       salary,
       increase: false,
+      like: false,
       id: this.maxId++
     }
 
@@ -45,6 +46,33 @@ class App extends Component {
         data: [...data, newItem]
       }
     })
+  }
+
+  onToggleIncrease = (id) => {
+    // this.setState(({data}) => {
+    //   const index = data.findIndex(item => item.id === id);
+    //   const old = data[index];
+    //   const newItem = {
+    //     ...old,
+    //     increase: !old.increase
+    //   };
+    //   const newArr = [...data.slice(0, index), newItem, ...data.slice(index + 1)];
+    //
+    //   return {
+    //     data: newArr
+    //   }
+    // });
+    this.setState(({data}) => ({
+      data: data.map(item => {
+        if (item.id === id) {
+          return {...item, increase: !item.increase}
+        }
+        return item;
+      })
+    }))
+  }
+  onToggleLike = (id) => {
+    console.log(`Like ${id}`)
   }
 
   render() {
@@ -60,6 +88,8 @@ class App extends Component {
         <EmployeesList
           data={this.state.data}
           onDelete={this.deleteItem}
+          onToggleIncrease={this.onToggleIncrease}
+          onToggleLike={this.onToggleLike}
         />
 
         <EmployeesAddForm
