@@ -84,7 +84,7 @@ class App extends Component {
   render() {
     const {data, term, filter} = this.state;
     const employees = this.state.data.length;
-    const increased = this.state.data.filter(item => item.increase === true).length;
+    const like = this.state.data.filter(item => item.like === true).length;
 
     const visibleData = this.filteredData(this.searchEmployee(data, term), filter);
 
@@ -92,7 +92,7 @@ class App extends Component {
       <div className='app'>
         <AppInfo
           employees={employees}
-          encreased={increased}
+          like={like}
         />
 
         <div className="search-panel">
